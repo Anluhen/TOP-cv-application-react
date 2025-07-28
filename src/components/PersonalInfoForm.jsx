@@ -1,41 +1,16 @@
 import { useState } from 'react'
 import TextInput from './TextInput.jsx'
 
-function PersonalInfoForm() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: ''
-    });
-    const [errors, setErrors] = useState({});
-    const [submitted, setSubmitted] = useState(false);
+function PersonalInfoForm({ formData, setFormData, onSubmit, errors,
+    submitted }) {
 
     function handleChange(e) {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     }
 
-    function validate(data) {
-        const newErrors = {}
-        if (!data.name) newErrors.name = 'Name is required';
-        if (!data.email) newErrors.email = 'Email is required';
-        if (!data.phone) newErrors.phone = 'Phone is required';
-        return newErrors;
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        const validationErrors = validate(formData);
-        setErrors(validationErrors);
-
-        if (Object.keys(validationErrors).length === 0) {
-            console.log('Submited:', formData);
-            setSubmitted(true);
-        }
-    }
-
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
             <h2>Personal Information</h2>
 
             <TextInput
@@ -45,8 +20,8 @@ function PersonalInfoForm() {
                 onChange={handleChange}
                 error={errors.name}
             />
-            
-            <TextInput 
+
+            <TextInput
                 label='E-mail'
                 name="email"
                 value={formData.email}
@@ -54,7 +29,7 @@ function PersonalInfoForm() {
                 error={errors.email}
             />
 
-            <TextInput 
+            <TextInput
                 label='Phone Number'
                 name="phone"
                 value={formData.phone}
