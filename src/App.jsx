@@ -39,9 +39,9 @@ function App() {
 
   return (
     <div>
-      {!submittedData && (
+      {!submitted && (
         <div style={{ marginTop: '2rem' }}>
-          <h1>CV Application</h1>
+          <h1 style={{maxWidth: '400px', margin: 'auto'}}>CV Application</h1>
           <PersonalInfoForm
             formData={formData}
             setFormData={setFormData}
@@ -50,13 +50,13 @@ function App() {
             submitted={submitted}
           />
           {/* // A section to add your educational experience (school name, title of study and date of study) */}
-           {/*<EducationForm
+           {/* <EducationForm
             formData={formData}
             setFormData={setFormData}
             onSubmit={handleSubmit}
             errors={errors}
             submitted={submitted}
-          />*/}
+          /> */}
           {/* // A section to add practical experience (company name, position title, main responsibilities of your jobs, date from and until when you worked for that company) */}
           {/* <ExperienceForm /> */}
           {/* // Be sure to include an edit and submit button for each section or for the whole CV. The submit button should submit your form and display the value of your input fields in HTML elements. The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content. You’re going to make heavy use of state and props, so make sure you understood those concepts.
@@ -65,13 +65,17 @@ function App() {
           <hr />
         </div>
       )}
-      {submittedData && (
+      {submitted && submittedData && (
         <div style={{ marginTop: '2rem' }}>
           <h2>Submitted Data:</h2>
           <h3>Personal Information</h3>
           <p><strong>Name:</strong> {submittedData.name}</p>
           <p><strong>Email:</strong> {submittedData.email}</p>
           <p><strong>Phone:</strong> {submittedData.phone}</p>
+        
+          <button onClick={() => setSubmitted(false)} style={{marginTop: '1rem'}}>
+            Edit Information
+          </button>
         </div>
       )}
     </div >
