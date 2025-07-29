@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Georgia', serif;
     margin: 0;
     padding: 0;
 }
@@ -33,4 +33,65 @@ button {
 .error {
     color: red;
     font-size: 0.875rem;
+}
+
+.cv-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  color: #333;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.cv-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+}
+
+.cv-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.cv-section h3 {
+  font-size: 1.4rem;
+  color: #2a2a2a;
+  margin-bottom: 0.5rem;
+}
+
+.cv-section p {
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}
+
+.experience-entry {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #fafafa;
+  border-left: 4px solid #aaa;
+  border-radius: 4px;
+}
+
+.edit-button {
+  margin-top: 1rem;
+  background-color: #e6e6e6;
+  color: #333;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-button:hover {
+  background-color: #d4d4d4;
+  color: #000;
+  border-color: #999;
 }

@@ -96,7 +96,7 @@ function App() {
 
   return (
     <div>
-      <h1 style={{ maxWidth: '400px', margin: 'auto' }}>CV Application</h1>
+      <h1 className="cv-heading">CV Application</h1>
       {!submittedPersonal && (
         <div style={{ marginTop: '2rem' }}>
           <PersonalInfoForm
@@ -137,55 +137,54 @@ function App() {
       )}
 
       {submittedData && (
-        <div style={{ marginTop: '2rem' }}>
-          <h2>Submitted Data:</h2>
+        <div className="cv-container">
+          <h2 className="cv-heading">Curriculum Vitae</h2>
 
           {submittedPersonal && (
-            <div>
+            <section className="cv-section">
               <h3>Personal Information</h3>
               <p><strong>Name:</strong> {submittedData.name}</p>
               <p><strong>Email:</strong> {submittedData.email}</p>
               <p><strong>Phone:</strong> {submittedData.phone}</p>
 
-              <button onClick={() => setSubmittedPersonal(false)} style={{ marginTop: '1rem' }}>
+              <button className="edit-button" onClick={() => setSubmittedPersonal(false)}>
                 Edit Information
               </button>
-            </div>
+            </section>
           )}
 
           {submittedEducation && (
-            <div>
-              <h3>Education Information</h3>
-              <p><strong>School Name:</strong> {submittedData.school}</p>
+            <section className="cv-section">
+              <h3>Education</h3>
+              <p><strong>School:</strong> {submittedData.school}</p>
               <p><strong>Title of Study:</strong> {submittedData.title}</p>
-              <p><strong>Date of Study:</strong> {submittedData.date}</p>
+              <p><strong>Date:</strong> {submittedData.date}</p>
 
-              <button onClick={() => setSubmittedEducation(false)} style={{ marginTop: '1rem' }}>
+              <button className="edit-button" onClick={() => setSubmittedEducation(false)}>
                 Edit Information
               </button>
-            </div>
+            </section>
           )}
 
           {submittedExperience && submittedExperienceData && (
-            <div>
+            <section className="cv-section">
               <h3>Job Experience</h3>
               {submittedExperienceData.map((exp, index) => (
-                <div key={index} style={{ marginBottom: '1rem' }}>
+                <div key={index} className="experience-entry">
                   <h4>Experience {index + 1}</h4>
-                  <p><strong>Company Name:</strong> {exp.company}</p>
-                  <p><strong>Position Title:</strong> {exp.position}</p>
-                  <p><strong>Main Responsibilities:</strong> {exp.resposabilities}</p>
+                  <p><strong>Company:</strong> {exp.company}</p>
+                  <p><strong>Position:</strong> {exp.position}</p>
+                  <p><strong>Responsibilities:</strong> {exp.resposabilities}</p>
                   <p><strong>Start Date:</strong> {exp.startDate}</p>
                   <p><strong>End Date:</strong> {exp.endDate}</p>
                 </div>
               ))}
 
-              <button onClick={() => setSubmittedExperience(false)} style={{ marginTop: '1rem' }}>
+              <button className="edit-button" onClick={() => setSubmittedExperience(false)}>
                 Edit Information
               </button>
-            </div>
+            </section>
           )}
-
         </div>
       )}
     </div >
