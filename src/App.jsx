@@ -14,7 +14,8 @@ function App() {
   });
   const [submittedData, setSubmittedData] = useState(null);
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [submittedPersonal, setSubmittedPersonal] = useState(false);
+  const [submittedEducation, setSubmittedEducation] = useState(false);
 
   function validate(data) {
     const newErrors = {}
@@ -24,58 +25,94 @@ function App() {
     return newErrors;
   }
 
-  function handleSubmit(e) {
+  function handlePersonalSubmit(e) {
     e.preventDefault();
 
     const validationErrors = validate(formData);
     setErrors(validationErrors);
-    setSubmitted(false);
+    setSubmittedPersonal(false);
 
     if (Object.keys(validationErrors).length === 0) {
-      setSubmitted(true);
+      setSubmittedPersonal(true);
+      setSubmittedData(formData);
+    }
+  }
+
+  function handleEducationSubmit(e) {
+    e.preventDefault();
+
+    const validationErrors = validate(formData);
+    setErrors(validationErrors);
+    setSubmittedEducation(false);
+
+    if (Object.keys(validationErrors).length === 0) {
+      setSubmittedEducation(true);
       setSubmittedData(formData);
     }
   }
 
   return (
     <div>
-      {!submitted && (
+      <h1 style={{ maxWidth: '400px', margin: 'auto' }}>CV Application</h1>
+      {!submittedPersonal && (
         <div style={{ marginTop: '2rem' }}>
-          <h1 style={{maxWidth: '400px', margin: 'auto'}}>CV Application</h1>
           <PersonalInfoForm
             formData={formData}
             setFormData={setFormData}
-            onSubmit={handleSubmit}
+            onSubmit={handlePersonalSubmit}
             errors={errors}
-            submitted={submitted}
+            submitted={submittedPersonal}
           />
-          {/* // A section to add your educational experience (school name, title of study and date of study) */}
-           {/* <EducationForm
-            formData={formData}
-            setFormData={setFormData}
-            onSubmit={handleSubmit}
-            errors={errors}
-            submitted={submitted}
-          /> */}
-          {/* // A section to add practical experience (company name, position title, main responsibilities of your jobs, date from and until when you worked for that company) */}
-          {/* <ExperienceForm /> */}
-          {/* // Be sure to include an edit and submit button for each section or for the whole CV. The submit button should submit your form and display the value of your input fields in HTML elements. The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content. You’re going to make heavy use of state and props, so make sure you understood those concepts.
-      // Create a components directory under your src directory and add your components.
-      // Include a styles directory under your src directory for your CSS files. You’ll need to import these in the component files to use them. */}
           <hr />
         </div>
       )}
-      {submitted && submittedData && (
+
+      {!submittedEducation && (
+        <div style={{ marginTop: '2rem' }}>
+          <EducationForm
+            formData={formData}
+            setFormData={setFormData}
+            onSubmit={handleEducationSubmit}
+            errors={errors}
+            submitted={submittedEducation}
+          />
+          <hr />
+        </div>
+      )}
+
+      {/* // A section to add practical experience (company name, position title, main responsibilities of your jobs, date from and until when you worked for that company) */}
+      {/* <ExperienceForm /> */}
+
+      {submittedData && (
         <div style={{ marginTop: '2rem' }}>
           <h2>Submitted Data:</h2>
-          <h3>Personal Information</h3>
-          <p><strong>Name:</strong> {submittedData.name}</p>
-          <p><strong>Email:</strong> {submittedData.email}</p>
-          <p><strong>Phone:</strong> {submittedData.phone}</p>
-        
-          <button onClick={() => setSubmitted(false)} style={{marginTop: '1rem'}}>
-            Edit Information
-          </button>
+
+          {submittedPersonal && (
+            <div>
+              <h3>Personal Information</h3>
+              <p><strong>Name:</strong> {submittedData.name}</p>
+              <p><strong>Email:</strong> {submittedData.email}</p>
+              <p><strong>Phone:</strong> {submittedData.phone}</p>
+
+              <button onClick={() => setSubmittedPersonal(false)} style={{ marginTop: '1rem' }}>
+                Edit Information
+              </button>
+            </div>
+          )}
+
+          {submittedEducation && (
+            <div>
+              <h3>Education Information</h3>
+              <p><strong>School Name:</strong> {submittedData.school}</p>
+              <p><strong>Title of Study:</strong> {submittedData.title}</p>
+              <p><strong>Date of Study:</strong> {submittedData.date}</p>
+
+              <button onClick={() => setSubmittedEducation(false)} style={{ marginTop: '1rem' }}>
+                Edit Information
+              </button>
+            </div>
+          )}
+
         </div>
       )}
     </div >
